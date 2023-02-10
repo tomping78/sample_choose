@@ -1,16 +1,34 @@
-import React, { useState, useEffect } from 'react'
+import axios from 'axios';
+import React from 'react';
+import { useEffect, useState } from 'react';
+import styled from 'styled-components';
 
-function MyComponent() {
-    const [count, setCount] = useState(0);
-    useEffect(()=>{
-        document.title = `업데이트 횟수 : ${count}`
-    })
-    return (
-        <>
-            <button onClick={()=>setCount(count+1)}>Title increase</button>
-            <button onClick={()=>setCount(count-1)}>Title decrease</button>
-        </>
-    )
+const Stylediv = styled.div`
+    font-weight:bold;
+    font-size: 12px;;
+    color:red;
+`
+function UseTime() {
+  const [datak, setData] = useState(null);
+  useEffect(() => {
+    axios.get('https://jsonplaceholder.typicode.com/todos/')
+      .then((response) => {
+        setData(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
+  const dataList = datak;
+
+  return (
+    <>
+            {dataList && dataList.map(item => (
+                <Stylediv key={item.id}>{item.title}</Stylediv>
+            ))}
+    </>
+  );
 }
 
-export default MyComponent;
+export default UseTime

@@ -1,24 +1,56 @@
 import React from 'react';
+import { useState, useRef } from 'react';
 import styled from 'styled-components';
-// import dummy from '../db/data.json';
 
-const TodoTemplateBlock = styled.div`
-    width:500px;
-    height:700px;
+const QuestionTitle = styled.div`
+    width:100%;
+    padding:10px 0;
+    text-align: center;
+    background:darkblue;
+    color:orangered;
+    font-size:20px;
+    font-weight:bold;
+`
 
-    position:relative;
-    background:#fff;
-    border-radius:15px;
-    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.84);
-    margin:10% auto;
-    display:flex;
-    flex-direction:column;
-`;
+function Main(props) {
 
+    const [first, setFirst] = useState(Math.ceil(Math.random() * 9));
+    const [second, setSecond] = useState(Math.ceil(Math.random() * 9));
+    const [result, setResult] = useState('');
+    const [value, setValue] = useState('');
 
-function Main({children}) {
+    const onChange = (e) => {
+        setValue(e.target.value);
+    }
+    const onSubmit = (e) => {
+        e.preventDefault();
+        autoFocus();
+        if (+value === first * second) {
+            setFirst(Math.ceil(Math.random() * 9));
+            setSecond(Math.ceil(Math.random() * 9));
+            setValue('');
+            setResult('정답입니다.');
+        } else {
+            setValue('');
+            setResult('오답입니다. 다시 시도해보세요.');
+        }
+        
+    }
+    const myRef = useRef();
+    const autoFocus = () => {
+        myRef.current.focus();
+    }
 
-    return <TodoTemplateBlock>{children}</TodoTemplateBlock>;
+    return (
+        <div>
+            <QuestionTitle>{first}곱하기 {second}는?</QuestionTitle>
+            <form onSubmit={onSubmit}>
+                <input type='number' value={value} onChange={onChange} ref={myRef} />
+                <button>입력</button>
+            </form>
+            <h3>{result}</h3>
+        </div>
+    );
 };
 
 export default Main;

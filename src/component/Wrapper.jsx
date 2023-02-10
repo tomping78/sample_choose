@@ -1,22 +1,25 @@
 import React from 'react';
+import { useState } from 'react';
 
-function Wrapper(props) {
-    const style = {
-        backgroundColor:'yellow',
-    };
-
-    const names = [
-        ['james', 20], 
-        ['tom', 28], 
-        ['babie', 33]
-    ];
-    const nameList = names.map((name) => console.log(name[0]) );
-
+function Wrapper() {
+    const [count, setCount] = useState(0);
+  
+    function handleAlertClick() {
+      setTimeout(() => {
+        alert('You clicked on: ' + count);
+      }, 3000);
+    }
     return (
-        <div style={style}>
-            {props.children} {nameList}
-        </div>
+      <div>
+        <p>You clicked {count} times</p>
+        <button onClick={() => setCount(count + 1)}>
+          Click me
+        </button>
+        <button onClick={handleAlertClick}>
+          Show alert
+        </button>
+      </div>
     );
-}
+  }
 
 export default Wrapper;

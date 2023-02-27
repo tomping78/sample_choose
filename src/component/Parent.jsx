@@ -9,6 +9,7 @@ function Parent() {
       <div>
         Received: {myname} {title} {title}
       </div>
+      <div>이거 수정합니다.</div>
     </div>
   );
 }

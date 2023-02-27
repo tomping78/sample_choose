@@ -10,6 +10,7 @@ function Parent() {
       <div>
         Received: {myname} {myname} {title}
       </div>
+      <div>여기 수정하지 마세요.</div>
     </div>
   );
 }

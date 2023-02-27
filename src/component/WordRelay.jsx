@@ -11,12 +11,12 @@ const WordRelay = memo(() => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        if (word[word.length - 1] === value[0]) {
+        if (word[word.length - 1] === value[0] && value.length >= 2) {
             setResult('정답입니다.');
             setWord(value);
             setValue('')
         } else {
-            setResult('오답입니다.');
+            setResult('오답이거나, 두글자 이상 입력하셔야 합니다.');
             setValue('')
         }
     }
@@ -25,7 +25,7 @@ const WordRelay = memo(() => {
     }
     useEffect(() => {
         setResult('아주 적절한 답입니다.')
-    }, [word])
+    }, [setValue])
 
     return (
         <div>

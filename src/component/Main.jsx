@@ -24,8 +24,7 @@ function Main(props) {
     }
     const onSubmit = (e) => {
         e.preventDefault();
-        autoFocus();
-        if (+value === first * second) {
+        if (+(value) === first * second) {
             setFirst(Math.ceil(Math.random() * 9));
             setSecond(Math.ceil(Math.random() * 9));
             setValue('');
@@ -43,10 +42,10 @@ function Main(props) {
 
     return (
         <div>
-            <QuestionTitle>{first}곱하기 {second}는?</QuestionTitle>
+            <QuestionTitle>{first} * {second} ?</QuestionTitle>
             <form onSubmit={onSubmit}>
                 <input type='number' value={value} onChange={onChange} ref={myRef} />
-                <button>입력</button>
+                <button onClick={autoFocus}>입력</button>
             </form>
             <h3>{result}</h3>
         </div>

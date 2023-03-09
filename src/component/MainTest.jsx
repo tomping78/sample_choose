@@ -21,7 +21,7 @@ function MainTest() {
   return (
     <div>
       <div>
-        <input name="name" value={name} onChange={onChange} />
+        <input name="name" value={name} onChange={(e) => dispatch(e.target)} />
         <input name="nickname" value={nickname} onChange={onChange} />
         <input type="number" name="age" value={age} onChange={onChange} />
       </div>

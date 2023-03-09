@@ -1,16 +1,35 @@
-import React from 'react';
+import React from "react";
+import { useState } from "react";
 
-function InputSample({username, email, onChange, onCreate}) {
-
-    return (
-        <div>
-            <input name='username' placeholder='계정명' onChange={onChange} value={username} />
-            <input name='email' placeholder='이메일' onChange={onChange} value={email} />
-            <button onClick={onCreate}>등록</button>
-            <div>값: {username}({email})</div>
-            
-        </div>
-    );
+function InputSample() {
+  const [inputs, setInputs] = useState({
+    name: "",
+    nickname: "",
+  });
+  const { name, nickname } = inputs;
+  const onChange = (e) => {
+    const { value, name } = e.target;
+    setInputs({
+      ...inputs,
+      [name]: value,
+    });
+  };
+  const onReset = () => {
+    setInputs({
+      name: "",
+      nickname: "",
+    });
+  };
+  return (
+    <div>
+      <input name="name" onChange={onChange} value={name} />
+      <input name="nickname" onChange={onChange} value={nickname} />
+      <button onClick={onReset}>등록</button>
+      <div>
+        값: {name}({nickname})
+      </div>
+    </div>
+  );
 }
 
 export default InputSample;

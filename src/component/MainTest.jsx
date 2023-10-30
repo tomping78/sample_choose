@@ -17,6 +17,9 @@ function MainTest() {
   const onChange = (e) => {
     dispatch(e.target);
   };
+  const onReset = () => {
+    dispatch({ name: null });
+  };
 
   return (
     <div>
@@ -38,6 +41,7 @@ function MainTest() {
           {age}
         </div>
       </div>
+      <button onClick={onReset}>reset</button>
     </div>
   );
 }

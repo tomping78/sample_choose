@@ -46,7 +46,7 @@ const DarkBackground = styled.div`
   background: rgba(0, 0, 0, 0.5);
 
   animation-duration: 0.25s;
-  animation-timing-function: ease-out;
+  animation-timing-function: ease-in-out;
   animation-name: ${fadeIn};
   animation-fill-mode: forwards;
 
@@ -70,7 +70,7 @@ const DialogBlock = styled.div`
   }
 
   animation-duration: 0.25s;
-  animation-timing-function: ease-out;
+  animation-timing-function: ease-in-out;
   animation-name: ${slideUp};
   animation-fill-mode: forwards;
 

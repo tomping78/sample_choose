@@ -48,31 +48,21 @@ import React from "react";
 
 function User({ user }) {
   return (
-    <div>
-      {user.username} ({user.email})
-    </div>
+    <>
+      <div>
+        {user.username} ({user.email})
+      </div>
+    </>
   );
 }
 
-function UserList() {
-  const users = [
-    {
-      id: 1,
-      username: "vanilar",
-      email: "van@nate.com",
-    },
-    {
-      id: 2,
-      username: "brook",
-      email: "bk@naver.com",
-    },
-  ];
+function UserList({ users }) {
   return (
-    <div>
-      {users.map((list) => (
-        <User user={list} />
+    <>
+      {users.map((user) => (
+        <User user={user} key={user.id} />
       ))}
-    </div>
+    </>
   );
 }
 

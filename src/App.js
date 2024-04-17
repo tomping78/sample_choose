@@ -3,7 +3,7 @@ import "./App.css";
 import Main from "./component/Main";
 import Wrapper from "./component/Wrapper";
 import WordRelay from "./component/WordRelay";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import GrandParent from "./component/GrandParent";
 import Counter from "./component/Counter";
 import { MyContext, TitleContext } from "./component/Context";
@@ -14,6 +14,7 @@ import InputSample from "./component/InputSample";
 import { ThemeProvider } from "styled-components";
 import Button from "./component/Button";
 import Dialog from "./component/Dialog";
+import CreateUser from "./component/CreateUser";
 
 function App() {
   const numbers = [1, 3, 5, 7];
@@ -26,7 +27,7 @@ function App() {
     setMyname("Sarah!");
   };
 
-  const [dialog, setDialog] = useState(false);
+  const [dialog, setDialog] = useState(true);
   const onClick = () => {
     setDialog(true);
   };
@@ -37,6 +38,51 @@ function App() {
   const onCancel = () => {
     console.log("취소");
     setDialog(false);
+  };
+
+  const [inputs, setInputs] = useState({
+    username: "",
+    email: "",
+  });
+  const { username, email } = inputs;
+  const onChange = (e) => {
+    const { name, value } = e.target;
+    setInputs({
+      ...inputs,
+      [name]: value,
+    });
+  };
+  const [users, setUsers] = useState([
+    {
+      id: 1,
+      username: "vanilar",
+      email: "van@nate.com",
+    },
+    {
+      id: 2,
+      username: "brook",
+      email: "bk@naver.com",
+    },
+    {
+      id: 3,
+      username: "bakara",
+      email: "kangwon@high1.com",
+    },
+  ]);
+
+  const nextId = useRef(4);
+  const onCreate = () => {
+    const user = {
+      id: nextId.current,
+      username,
+      email,
+    };
+    setUsers([...users, user]);
+    setInputs({
+      username: "",
+      email: "",
+    });
+    nextId.current += 1;
   };
 
   return (
@@ -54,7 +100,13 @@ function App() {
         </TitleContext.Provider>
         <MainTest />
         <LoginForm />
-        <UserList />
+        <CreateUser
+          username={username}
+          email={email}
+          onChange={onChange}
+          onCreate={onCreate}
+        />
+        <UserList users={users} />
         <ThemeProvider
           theme={{
             palette: {
